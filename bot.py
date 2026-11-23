@@ -3,6 +3,9 @@
 import asyncio
 import datetime
 import logging
+import os
+import threading
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 from aiogram import Bot, Dispatcher
 from aiogram.client.default import DefaultBotProperties
@@ -17,6 +20,36 @@ from handlers.testing import router as testing_router
 import db
 
 
+def _start_health_server() -> None:
+    """PaaS (Railway, Render va h.k.) uchun $PORT'da oddiy health endpoint.
+
+    Railway health check uchun HTTP port ochishni kutlaydi. Polling bot
+    o'zi port ochmaydi, shu sababli $PORT bo'lsa shu yerda kichik server
+    ishga tushadi va "200 ok" qaytaradi. Lokalda $PORT bo'lmasa — hech
+    narsa qilmaydi (bot'ga ta'sir yo'q).
+    """
+    port = os.getenv("PORT")
+    if not port:
+        return
+
+    class _Handler(BaseHTTPRequestHandler):
+        def do_GET(self):
+            self.send_response(200)
+            self.send_header("Content-Type", "text/plain")
+            self.end_headers()
+            self.wfile.write(b"ok")
+
+        def log_message(self, *args):
+            pass
+
+    try:
+        server = ThreadingHTTPServer(("0.0.0.0", int(port)), _Handler)
+        logging.info("Health server: 0.0.0.0:%s", port)
+        server.serve_forever()
+    except Exception as exc:
+        logging.warning("Health server ishlamadi: %s", exc)
+
+
 async def main():
     logging.basicConfig(
         level=logging.INFO,
@@ -27,6 +60,9 @@ async def main():
 
     # Ma'lumotlar bazasini ishga tushiramiz
     await db.init_db()
+
+    # PaaS health check uchun kichik server (fon ipida)
+    threading.Thread(target=_start_health_server, daemon=True).start()
 
     bot = Bot(
         token=BOT_TOKEN,
