@@ -86,6 +86,23 @@ async def main():
         ]
     )
 
+    # Botga /start bermasdan turib, bo'sh chatda ko'rinadigan tavsif
+    await bot.set_my_description(
+        "🧠 Assalomu alaykum! Men — psixologiya testlari botiman.\n\n"
+        "Quyidagi testlarni topshirishingiz mumkin:\n"
+        "😰 Stress darajasi\n"
+        "😟 Xavotir (anshedlik) darajasi\n"
+        "😔 Depressiv belgilar\n"
+        "💪 O'z-o'zini baholash (self-esteem)\n\n"
+        "Har bir test inline tugmalar orqali. "
+        "Yakunda avtomatik ball va izoh beriladi.\n\n"
+        "Boshlash uchun quyidagi \"Start\" tugmasini bosing yoki /start yuboring."
+    )
+    # Chat ro'yxati/profil'da qisqa tavsif
+    await bot.set_my_short_description(
+        "🧠 Psixologiya testlari: stress, xavotir, depressiya, self-esteem"
+    )
+
     me = await bot.get_me()
     logging.info("Bot ishga tushdi: @%s (id=%s)", me.username, me.id)
     logging.info("To'xtatish uchun: Ctrl+C")
