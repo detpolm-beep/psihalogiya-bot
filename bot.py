@@ -88,19 +88,17 @@ async def main():
 
     # Botga /start bermasdan turib, bo'sh chatda ko'rinadigan tavsif
     await bot.set_my_description(
-        "🧠 Assalomu alaykum! Men — psixologiya testlari botiman.\n\n"
-        "Quyidagi testlarni topshirishingiz mumkin:\n"
-        "😰 Stress darajasi\n"
-        "😟 Xavotir (anshedlik) darajasi\n"
-        "😔 Depressiv belgilar\n"
-        "💪 O'z-o'zini baholash (self-esteem)\n\n"
-        "Har bir test inline tugmalar orqali. "
-        "Yakunda avtomatik ball va izoh beriladi.\n\n"
-        "Boshlash uchun quyidagi \"Start\" tugmasini bosing yoki /start yuboring."
+        "Stanford University ishlab chiqgan kasbiy psixologiya test platformasi.\n\n"
+        "Bu bot yordamida siz quyidagi professional testlardan o'tishingiz mumkin:\n\n"
+        "💼 Kasbiy stress darajasi — Vaysman anketasi\n"
+        "😊 Ishdan qoniqish darajasi — Rozanova metodikasi\n\n"
+        "Testlar xalqaro standartlarga asoslangan bo'lib, "
+        "natijalar ilmiy asosda tahlil qilinadi.\n\n"
+        "Created by Meleboyev Tohirbek"
     )
     # Chat ro'yxati/profil'da qisqa tavsif
     await bot.set_my_short_description(
-        "🧠 Psixologiya testlari: stress, xavotir, depressiya, self-esteem"
+        "Stanford | Kasbiy psixologiya testlari platformasi"
     )
 
     me = await bot.get_me()
