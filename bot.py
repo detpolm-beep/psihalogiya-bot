@@ -88,7 +88,7 @@ async def main():
 
     # Botga /start bermasdan turib, bo'sh chatda ko'rinadigan tavsif
     await bot.set_my_description(
-        "Stanford University ishlab chiqgan kasbiy psixologiya test platformasi.\n\n"
+        "Stanford School ishlab chiqgan kasbiy psixologiya test platformasi.\n\n"
         "Bu bot yordamida siz quyidagi professional testlardan o'tishingiz mumkin:\n\n"
         "💼 Kasbiy stress darajasi — Vaysman anketasi\n"
         "😊 Ishdan qoniqish darajasi — Rozanova metodikasi\n\n"
@@ -98,7 +98,7 @@ async def main():
     )
     # Chat ro'yxati/profil'da qisqa tavsif
     await bot.set_my_short_description(
-        "Stanford | Kasbiy psixologiya testlari platformasi"
+        "Stanford School | Kasbiy psixologiya testlari platformasi"
     )
 
     me = await bot.get_me()
